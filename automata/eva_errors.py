@@ -28,6 +28,9 @@ class EvaLockError(EvaError, Exception):
     """Error thrown when Eva has robot lock issues"""
 
 
+class EvaConnectionError(EvaError, Exception):
+    """Error thrown when cannot connect to Eva over the network"""
+
 def eva_error(label, r=None):
     if r is not None:
         __handle_http_error(label, r)

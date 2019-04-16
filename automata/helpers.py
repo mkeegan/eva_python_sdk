@@ -1,10 +1,13 @@
 import threading
 import re
 
-class threadsafe_object:
+from jsonmerge import merge
+
+class threadsafe_JSON:
     """
-    threadsafe_object is an object wrapped in a mutex for threadsafe getting and setting.
-    Set is a reserved keyword in python so we'll use update instead.
+    threadsafe_JSON is an JOSN object wrapped in a mutex for threadsafe getting and setting.
+    Set is a reserved keyword in python so we'll use update instead. Use merge update the
+    structure with changes from the suppied object.
     """
     def __init__(self):
         self.object_lock = threading.Lock()
@@ -22,6 +25,19 @@ class threadsafe_object:
             obj = self.object
             self.object_lock.release()
             return obj 
+
+
+    def merge_update(self, changes):
+            self.object_lock.acquire()
+            obj = self.object
+
+            # TODO may need to check that merge was successful
+            # TODO can this throw?
+            merged_obj = merge(obj, changes)
+
+            self.object = merged_obj
+            self.object_lock.release()
+            return obj
 
 
 def strip_ip(host_address):

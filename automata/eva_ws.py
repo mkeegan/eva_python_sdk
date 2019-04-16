@@ -6,7 +6,7 @@ import logging
 
 from threading import Thread
 
-async def ws_connect(host_ip, token):
+async def ws_connect(host_ip, token) -> websockets.WebSocketClientProtocol:
     """
     Connect is an async function that returns a connected Eva websocket
     
