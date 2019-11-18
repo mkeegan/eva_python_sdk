@@ -42,7 +42,7 @@ class EvaCamera:
         print(f'moving to item position {item_position}')
         with self.__eva.lock():
             to_item_joint_angles = self.__eva.calc_inverse_kinematics(POSE_GUESS, item_position, DEFAULT_END_EFFECTOR_ORIENTATION)
-            self.__eva.control_go_to(to_item_joint_angles['ik']['joints'])
+            self.__eva.control_go_to(to_item_joint_angles['ik']['joints'], mode='automatic')
         
         print("in item position")        
 
@@ -62,7 +62,7 @@ class EvaCamera:
         """
         print("moving home")
         with self.__eva.lock():
-            self.__eva.control_go_to(POSE_HOME)      
+            self.__eva.control_go_to(POSE_HOME, mode='automatic')      
 
         print("in home position")          
 

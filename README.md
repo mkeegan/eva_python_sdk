@@ -75,7 +75,7 @@ eva = Eva(host_ip, token)
 
 with eva.lock():
     eva.control_wait_for_ready()
-    eva.control_go_to([0, 0, 0, 0, 0, 0], mode='teach')
+    eva.control_go_to([0, 0, 0, 0, 0, 0], mode='automatic')
 ```
 
 **Toolpath create and run**
@@ -107,7 +107,7 @@ with eva.lock():
     eva.control_wait_for_ready()
     eva.toolpaths_use(toolpath)
     eva.control_home()
-    eva.control_run(loop=1, mode='teach')
+    eva.control_run(loop=1, mode='automatic')
 ```
 
 Please refer to the examples directory for more SDK usage examples.

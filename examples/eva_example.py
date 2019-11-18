@@ -17,7 +17,7 @@ eva = Eva(host_ip, token)
 # Send Eva to a waypoint
 with eva.lock():
     eva.control_wait_for_ready()
-    eva.control_go_to([0, 0, 0, 0, 0, 0])
+    eva.control_go_to([0, 0, 0, 0, 0, 0], mode='automatic')
 
 # Print Eva's toolpaths
 toolpaths = eva.toolpaths_list()
@@ -52,4 +52,4 @@ with eva.lock():
     eva.control_wait_for_ready()
     eva.toolpaths_use(toolpath)
     eva.control_home()
-    eva.control_run(loop=1)
+    eva.control_run(loop=1, mode='automatic')
